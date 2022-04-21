@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update-task</title>
+</head>
+
+<body>
+    {% extends "bootstrap/base.html" %}
+    {% import "bootstrap/wtf.html" as wtf %}
+
+    {% block title %}
+    Add Task
+    {% endblock %}
+
+    {% block styles %}
+    {{super()}}
+    <link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+    {% endblock %}
+
+    {% block content %}
+    <div class="container my-2" style="width: 500px; border-style: groove; text-align: center; height: 450px; margin-top: 50px">
+        <h1 style="font-size:350%; padding-top: 50px">Update Task Here</h1>
+
+        <form method="post" action="">
+            
+            {{ form.hidden_tag() }} <br> 
+            <br>
+            <label for="taskname">Title:</label><br>
+            {{ form.taskname }} <br>
+            <br>
+            <label for="desc">Description:</label><br>
+            {{ form.desc }} <br>
+            <br>
+            <label for="finished">Finished?</label>
+            {{ form.finished }} <br>
+            <br>
+            {{ form.submit }}<br>
+            <br>
+            <br>
+        </form>
+        
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

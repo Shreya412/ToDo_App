@@ -1,0 +1,17 @@
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 200%;
+    background-image: url('note .jpg');
+    background-size: cover;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+ul {
+    list-style-type: none;
+    margin: 50px;
+    padding: 50px;
+  }

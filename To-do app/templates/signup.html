@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+</head>
+<body>
+    {% extends "bootstrap/base.html" %}
+    {% import "bootstrap/wtf.html" as wtf %}
+
+    {% block title %}
+    Sign Up
+    {% endblock %}
+
+
+    {% block styles %}
+    {{super()}}
+    <link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+    {% endblock %}
+
+    {% block content %}
+    <div class="container my-2" style="width: 500px; border-style: groove; text-align: center; height: 560px; margin-top: 20px">
+        <h1 style="font-size:350%; padding-top: 20px">Sign Up Page</h1>
+
+        <form method="post" action="">
+            
+            {{ form.hidden_tag() }} <br> 
+            <br>
+            <label for="email">Email:</label> <br>
+            {{ form.email }} <br>
+            <br>
+            <label for="username">Username:</label> <br>
+            {{ form.username }} <br>
+            <br>
+            <label for="password">Password:</label><br>
+            {{ form.password }} <br>
+            <br>
+            <label for="confirmpass">Confirm Password:</label><br>
+            {{ form.confirmpass }} <br>
+            <br>
+            {{ form.submit }}<br>
+            <br>
+        </form>
+
+        <div style="text-align: center;">
+            <h1>{{ msg }}</h1>
+        </div>
+
+        <p>Already a user? <a href="{{url_for('login')}}">Login</a></p>
+        
+    </div>
+    {% endblock %}
+</body>
+</html>

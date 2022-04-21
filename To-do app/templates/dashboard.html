@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+    {% extends "bootstrap/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li><a href="{{ url_for('logout') }}">Press here to Log Out</a></li>
+        </ul>
+    </div>
+</div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header"> Hello! Welcome back {{ user.username }}!</h1>
+        </div>
+    </div>
+</div>
+<div class="buttons">
+    <button style="margin: 50px"><a href="{{ url_for('addtask') }}">Create New</a></button><br>
+    <br>
+</div>
+
+
+<div class="center">
+
+        <table class="table" style="margin-left: 30px;">
+            <tr>
+                <th colspan="4" class="head" style="text-align: center; font-size: 300%">Dashboard</th>
+            </tr>
+            <tr>
+                <th>Your Task List</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for task in taskname %}
+                {% if task.finished == True %}
+                <tr class="row">
+                    <td><strike>{{ task.taskname }}</strike></td>
+                    <td><strike>{{ task.desc }}</strike></td>
+                    <td><a href="/update/{{ task.idtask }}">Update</a></td>
+                    <td><a href="/delete/{{ task.idtask }}" data-toggle="modal" data-target="#exampleModalCenter">Delete</a></td>
+                </tr>
+
+                {% else %}
+                <tr class="row">
+                    <td>{{ task.taskname }}</td>
+                    <td>{{ task.desc }}</td>
+                    <td><a href="/update/{{ task.idtask}}">Update</a></td>
+                    <td><a href="/delete/{{ task.idtask }}" data-toggle="modal" data-target="#exampleModalCenter">Delete</a></td>
+                </tr>
+                <div class="modal fade" id="exampleModalCenter">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content1">
+                        <!-- <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle{{task.idtask}}">Deleting Post Permanently</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div> -->
+                        
+                        <div class="modal-footer" style="align-items: center; background-color:#eee ; width: 130px">
+                            <div class="modal-body" style="align-items: center;">
+                                <p >Are you sure?</p>
+                                <form action="/delete/{{ task.idtask }}" method="post">
+                                    <input type="submit" value="Delete" class="btn btn-danger" style="align-items: center;">
+                                </form>
+                              </div>
+                            <div style="align-items:center; padding: 5px">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        
+                          
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+            {% endfor %}
+            
+</div>
+{% endblock %}
+<!-- <script>
+    $(document).on('click', ':not(form)[data-confirm]', function (e) {
+        if (!confirm($(this).data('confirm'))) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        }
+    });
+</script> -->
+</body>
+</html>
